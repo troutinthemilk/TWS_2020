@@ -1,23 +1,21 @@
 ---
-  title: "Module 4: Introduction to linear regresssion
+title: "Module 5: Introduction to linear regression and ANOVA"
 author: "Jake Ferguson"
 output:
   xaringan::moon_reader:
-  css: [default, metropolis, metropolis-fonts, "Title.css"]
-lib_dir: libs
-includes:
-  after_body: logo.html
-nature:
-  highlightStyle: github
-highlightLines: true
-countIncrementalSlides: false
+    css: [default, metropolis, metropolis-fonts]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
 editor_options: 
   chunk_output_type: console
 header-includes :
   - \usepackage {amsmath}
-- \usepackage{mathrsfs}
+  - \usepackage{mathrsfs}
 ---
-  class: inverse
+class: inverse
 
 ```{r, echo=F, message=F, warning=F, eval=T}
 #setting up my ggplot defaults. Update with your own preferences
@@ -38,15 +36,42 @@ theme_update(plot.title = element_text(hjust = 0.5),
 
 <br>
   
-  
-  
-1. Introduce the central limit theorem
+1. 
 
-2. Understand some basic operations on probability used in inference
+---
+# Continuous response, discrete predictors
 
-3. Calculate Wald confidence intervals of estimates
+The t-test compares the mean between two groups
+```{r, echo=F, fig.align="center", out.width="80%", fig.asp=0.7}
+glass.dat <- read.csv(file="../Data/BeerGlassShape.csv")
 
-4. Run one- and two-sample t-test
+ggplot(data=glass.dat) + 
+  geom_boxplot(aes(x=glassShape, y=drinkingMinutes))
+```
 
+---
+# What about more than 2 groups?
+
+```{r, echo=F, fig.align="center", out.width="80%"}
+knitr::include_graphics("https://www.homestratosphere.com/wp-content/uploads/2018/02/types-of-beer-glasses.jpg")
+```
+
+.footnote[image: https://www.homestratosphere.com]
+
+---
+# Testing multiple groups
+
+- Do every pairwise comparison.
+--
+
+- Be clever. 
+
+
+```{r, echo=FALSE, out.width= "40%"}
+knitr::include_graphics("http://www.economics.soton.ac.uk/staff/aldrich/fisherguide/Doc1_files/image001.gif")
+```
+
+.footnote[http://www.economics.soton.ac.uk/staff/aldrich/fisherguide]
+---
 
 

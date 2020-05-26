@@ -3,10 +3,8 @@ title: "Module 4: Inference on a normal population"
 author: "Jake Ferguson"
 output:
   xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts, "Title.css"]
+    css: [default, metropolis, metropolis-fonts]
     lib_dir: libs
-    includes:
-      after_body: logo.html
     nature:
       highlightStyle: github
       highlightLines: true
@@ -447,10 +445,10 @@ Does the shape of a glass affect the speed a beer is consumed?
 ```{r, echo=F, fig.align="center", out.width="80%"}
 glass.dat <- read.csv(file="../Data/BeerGlassShape.csv")
 
-knitr::include_graphics("https://www.homestratosphere.com/wp-content/uploads/2018/02/types-of-beer-glasses.jpg")
+knitr::include_graphics("https://journals.plos.org/plosone/article/figure/image?size=large&id=10.1371/journal.pone.0043007.g001")
 ```
 
-.footnote[image: https://www.homestratosphere.com]
+.footnote[Attwood AS, Scott-Samuel NE, Stothart G, Munafò MR (2012) Glass Shape Influences Consumption Rate for Alcoholic Beverages. PLoS ONE 7(8): e43007. https://doi.org/10.1371/journal.pone.0043007]
 ---
 # The data 
 ```{r, echo=F, fig.align="center", out.width="80%", fig.asp=0.7}

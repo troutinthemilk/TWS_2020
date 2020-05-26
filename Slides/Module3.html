@@ -7,7 +7,6 @@
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
-    <link rel="stylesheet" href="Title.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -152,7 +151,7 @@ sample(x=c(-1,1), size=10, replace=T) #randomly sample 10 values from -1 and 1
 ```
 
 ```
-##  [1] -1  1  1 -1 -1  1  1  1  1 -1
+##  [1]  1  1  1  1 -1  1  1  1 -1 -1
 ```
 
 Sampling with replacement means that once a value is drawn from the original set, it can be drawn again.
@@ -255,7 +254,7 @@ print(2*p.val) #double this for a two-sided test
 ```
 
 ```
-## [1] 0.2428
+## [1] 0.232
 ```
 
 &lt;img src="Module3_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
@@ -349,7 +348,7 @@ print(p.val)
 ```
 
 ```
-## [1] 0.0012
+## [1] 0.0016
 ```
 ]
 
@@ -442,35 +441,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-<!--- https://www.garrickadenbuie.com/blog/xaringan-tip-logo-all-slides/ -->
-
-<style>
-  .logo {
-    background-image: url(CWS_logo.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 0em;
-    right: 1em;
-    width: 85px;
-    height: 85px;
-    z-index: 0;
-  }
-</style>
-  
-  <script>
-  document
-.querySelectorAll(
-  '.remark-slide-content' +
-    ':not(.title-slide)' +
-    // add additional classes to exclude here, e.g.
-  // ':not(.inverse)' +
-    ':not(.hide-logo)'
-)
-.forEach(el => {
-  el.innerHTML += '<div class="logo"></div>';
-});
-</script>
 
 <script>
 (function() {
