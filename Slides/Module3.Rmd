@@ -175,8 +175,8 @@ Sampling with replacement means that once a value is drawn from the original set
 ---
 class: inverse, middle
 
-# Excercise 3A
-
+# Exercise 3A
+-----
 ## Using the sample function
 
 ---
@@ -216,8 +216,8 @@ for(i in 1:5) {
 ---
 class: inverse, middle
 
-# Excercise 3B
-
+# Exercise 3B
+-------
 ## Your first for loop
 
 
@@ -309,7 +309,7 @@ ggplot(data=Tdat, aes(x=T, y=Density)) +
 class: inverse, middle
 
 # Excercise 3C
-
+-------
 ## Paired-sample randomization test
 
 ---
