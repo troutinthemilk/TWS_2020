@@ -159,8 +159,8 @@ ggplot(data = mpg) +
 ---
 class: inverse, middle
 
-# Excercise 2A
-
+# Exercise 2A
+-------
 ## Build a scatterplot
 
 ---
@@ -245,9 +245,9 @@ ggplot(mpg) +
 ---
 class: inverse, middle
 
-# Excercise 2B
-
-## Polish your scatterplots
+# Exercise 2B
+-----------
+## Polishing your scatterplot
 
 ---
 
@@ -350,8 +350,8 @@ knitr::include_graphics("https://paulvanderlaken.files.wordpress.com/2017/09/sim
 
 class: middle, inverse
 
-#Excercise 2C
-
+#Exercise 2C
+-------
 ## Combining geometries
 
 ---
@@ -392,8 +392,8 @@ ggplot(iris) +
 
 class: middle, inverse
 
-# Excercise 2D
-
+# Exercise 2D
+-----
 ## Build a boxplot
 
 ---
@@ -425,6 +425,14 @@ ggplot(data=mpg) +
   xlab("Manufacturer") + ylab("Number of vehicles tested") +
   theme(axis.text.x = element_text(size = 8), aspect.ratio=0.5) 
 ```
+
+
+---
+class: middle, inverse
+
+#Exercise 2E
+-------
+## Univariate plots
 
 ---
 

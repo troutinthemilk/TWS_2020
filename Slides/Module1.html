@@ -131,6 +131,41 @@ y*2
 ```
 
 Note that errors in R can be difficult to interpret. Cut and paste into **google** to decipher!
+
+---
+#Order of operations
+
+
+Precedence of operations, from highest to lowest:
+^ exponentiation
+
+* / multiplication, division
+
++ - addition, subtraction
+
+`&gt;` `&lt;` `&lt;=` `==` `!=` comparison operators (less than , greater thean, less than or equal to, equal to, not equal to)
+
+However, best practice is to use parenthesis
+
+```r
+x &lt;- 36
+y &lt;- 7
+
+sqrt(x)*7-2
+```
+
+```
+## [1] 40
+```
+
+```r
+sqrt(x)*(7-2)
+```
+
+```
+## [1] 30
+```
+
 ---
 # Collections of values
 
@@ -245,8 +280,8 @@ rep(3.14, times=10) #repeat a value
 class: inverse, middle
 
 # Excercise 1A
-
-## variables and vectors
+-------
+## Variables and vectors
 
 ---
 # Data frames
@@ -377,13 +412,41 @@ str(bass.dat)
 class: inverse, middle
 
 # Excercise 1B
-
+----------------
 ## Reading in data
 
 ---
-# Creating new variables
+# Special values
 
-It is often useful to create new variables ...
+Missing values: `NA`
+
+infinite values: `Inf`, `-Inf`
+
+```r
+1/0
+```
+
+```
+## [1] Inf
+```
+
+logical: `TRUE` and `FALSE`
+
+```r
+is.numeric(7)
+```
+
+```
+## [1] TRUE
+```
+
+```r
+is.na(7)
+```
+
+```
+## [1] FALSE
+```
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
