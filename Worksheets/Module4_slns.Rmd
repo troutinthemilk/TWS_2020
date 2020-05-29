@@ -125,6 +125,5 @@ t.test(Antibody ~ Treatment, data=bird.dat, paired=TRUE)
 
 mouse.dat <- read.csv(file="../Data/SpinocerebellarAtaxia.csv")
 t.test(lifespan ~ treatment, data=bird.dat, paired=TRUE)
-
 ```
 
