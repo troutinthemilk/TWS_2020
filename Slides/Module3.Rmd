@@ -386,7 +386,9 @@ ggplot() +
 ```
 
 ]
+
 --
+
 What do we conclude?
 ---
 class: inverse, middle

@@ -4,9 +4,11 @@ output: html_notebook
 ---
 
 ```{r}
-library(ggplot2)
-library(ggthemes)
+library(ggplot2) #load ggplot
+library(ggthemes) #load themes package for ggplot
 theme_set(theme_tufte()) # a theme I like.
+
+#set some options that I like
 theme_update(plot.title = element_text(hjust = 0.5), 
              axis.line.x = element_line(color="black", size = 1),
              axis.line.y = element_line(color="black", size = 1),
