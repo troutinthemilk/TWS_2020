@@ -79,7 +79,6 @@ monet.dat$SIGNED <- as.factor(monet.dat$SIGNED)
 monet.dat <- subset(monet.dat, SIZE< 2000) #just take the paintings less that size 2000 cm^2
 
 monet.mod <- lm(log(PRICE) ~ HEIGHT + WIDTH + SIGNED + HOUSE -1 , data=monet.dat)
-
 ```
 Based on your model does a centimeter increase in WIDTH or HEIGHT differently affect the PRICE? Does having a signed painting increase it's value?
 
@@ -88,7 +87,7 @@ Based on your model does a centimeter increase in WIDTH or HEIGHT differently af
 # Exercise 5D #
 ###############
 
-## Run an ANOVA model
+## Run an ANOVA model 
 
 Run an ANOVA on the model you defined above and a similar model without the signature. How do you interpret differences in the F-tests on HOUSE in both of these models?
 ```{r}
