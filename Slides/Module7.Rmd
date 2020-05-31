@@ -238,7 +238,7 @@ For the pheasant model, $R^2_{pseudo}=$ `r round(1 - 94.911/484.156,2)`.
 ---
 class: inverse, middle
 
-# Excercise 7A
+# Exercise 7A
 -----
 ## Fit a count model
 
@@ -379,7 +379,7 @@ beaver.nb
 ---
 class: inverse, middle
 
-# Excercise 7B
+# Exercise 7B
 -----
 ## Negative binomial regression
 
@@ -626,7 +626,7 @@ ggplot(data=silver.dat, aes(x=Elev, y=Survival)) +
 ---
 class: inverse, middle
 
-# Excercise 7C
+# Exercise 7C
 -----
 ## Modeling categorical data
 
@@ -697,7 +697,7 @@ ggplot(data=silver.dat, aes(x=Elev, y=Survival)) +
   xlab("Elevation") + ylab('Proportion surviving')
 ```
 
-# Excercise 7D
+# Exercise 7D
 -----
 ## Fit an overdispersed categorical model
 
