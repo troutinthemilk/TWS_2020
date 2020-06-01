@@ -197,22 +197,19 @@ choice.dat
 ---
 # Extracting and subsetting dataframes
 
-We can access specific rows and columns of dataframes
-
+.pull-left[
 ```{r}
 choice.dat[3:5,] #3 rows
-
 choice.dat[,2] #1 column
-
-choice.dat[3:5,2:3] #3 rows and 2 columns
+choice.dat[3:5,1:2] #3 rows and 2 columns
 ```
+]
 
-or access columns by name with the `$` operator.
-
+.pull-right[
 ```{r}
-choice.dat$Choice
+choice.dat$Choice # access columns by name
 ```
-
+]
 ---
 # Reading in data from a file
 
@@ -269,3 +266,14 @@ logical: `TRUE` and `FALSE`
 is.numeric(7)
 is.character(7)
 ```
+
+---
+# Summary 
+
+<br>
+
+- R stores numeric and categorical data differently
+
+- `data.frame`s store multiple vectors of data and can contain both numeric and categorical types
+
+- `read.csv` is used to read in csv file, the most common types of input files. These can be exported from excel or libreoffice.
