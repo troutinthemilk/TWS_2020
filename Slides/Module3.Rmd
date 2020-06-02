@@ -1,6 +1,6 @@
 ---
 title: "Module 3: Introduction to hypothesis testing"
-author: "Jake Ferguson"
+author: "Jake Ferguson (jakeferg@hawaii.edu)"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts]
