@@ -143,9 +143,7 @@ Precedence of operations, from highest to lowest:
 
 + - addition, subtraction
 
-`&gt;` `&lt;` `&lt;=` `==` `!=` comparison operators (less than , greater thean, less than or equal to, equal to, not equal to)
-
-However, best practice is to use parenthesis
+However, best practice is to use parenthesis for clarity
 
 ```r
 x &lt;- 36
@@ -159,11 +157,58 @@ sqrt(x)*7-2
 ```
 
 ```r
+(sqrt(x)*7)-2
+```
+
+```
+## [1] 40
+```
+
+```r
 sqrt(x)*(7-2)
 ```
 
 ```
 ## [1] 30
+```
+
+---
+# Logical operations
+
+`&gt;` `&lt;` `&lt;=` `==` `!=` comparison operators (less than , greater thean, less than or equal to, equal to, not equal to)
+
+
+
+```r
+7 &lt; 2
+```
+
+```
+## [1] FALSE
+```
+
+```r
+7 &gt; 2
+```
+
+```
+## [1] TRUE
+```
+
+```r
+7 == 2
+```
+
+```
+## [1] FALSE
+```
+
+```r
+2 == 2
+```
+
+```
+## [1] TRUE
 ```
 
 ---
@@ -452,9 +497,13 @@ is.character(7)
 ---
 # Summary 
 
+&lt;br&gt;
+
 - R stores numeric and categorical data differently
 
-- data.frames store multiple vectors of data and can contain both numeric and categorical types
+- `data.frame`s store multiple vectors of data and can contain both numeric and categorical types
+
+- `read.csv` is used to read in csv file, the most common types of input files. These can be exported from excel or libreoffice.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

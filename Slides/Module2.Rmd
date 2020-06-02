@@ -152,6 +152,7 @@ str(mpg)
 # Plotting miles per gallon 
 
 ```{r, out.width = "80%", fig.asp = 0.7, warning=F, fig.align="center"}
+library(ggplot2) #loads the ggplot library.
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy))
 ```
@@ -159,8 +160,8 @@ ggplot(data = mpg) +
 ---
 class: inverse, middle
 
-# Exercise 2A
--------
+# Excercise 2A
+
 ## Build a scatterplot
 
 ---
@@ -196,7 +197,7 @@ mpg$year <- as.factor(mpg$year)
 
 ```{r, out.width = "80%", fig.asp = 0.7, warning=F, fig.align="center"}
 ggplot(data=mpg) + 
-  geom_point(aes(x=displ, y=hwy, color=class))
+  geom_point(mapping=aes(x=displ, y=hwy, color=class))
 ```
 
 
@@ -206,7 +207,7 @@ ggplot(data=mpg) +
 
 ```{r, out.width = "70%", fig.asp = 0.7, warning=F, fig.align="center"}
 ggplot(data=mpg) + 
-  geom_point(aes(x=displ, y=hwy, size=class))
+  geom_point(mapping=aes(x=displ, y=hwy, size=class))
 ```
 
 
@@ -216,7 +217,7 @@ ggplot(data=mpg) +
 
 ```{r, out.width = "60%", fig.asp = 0.7, warning=T, fig.align="center"}
 ggplot(data=mpg) + 
-  geom_point(aes(x=displ, y=hwy, shape=class))
+  geom_point(mapping=aes(x=displ, y=hwy, shape=class))
 ```
 
 ---
@@ -227,8 +228,8 @@ ggplot(data=mpg) +
 Editing arguments outside of `aes` will modify the all observations
 
 ```{r out.width = "65%", fig.asp = 0.7, fig.width=8, warning=F}
-ggplot(mpg) + 
-  geom_point(aes(x=displ, y=hwy, color=class, size=year), alpha=0.5) 
+ggplot(data=mpg) + 
+  geom_point(mapping=aes(x=displ, y=hwy, color=class, size=year), alpha=0.5) 
 ```
 
 ---
@@ -236,8 +237,8 @@ ggplot(mpg) +
 # Aspect & axis labels
 
 ```{r out.width = "80%", fig.asp = 0.7, fig.width=8, warning=F, fig.align="center"}
-ggplot(mpg) + 
-  geom_point(aes(x=displ, y=hwy, color=class, size=year)) +
+ggplot(data=mpg) + 
+  geom_point(mapping=aes(x=displ, y=hwy, color=class, size=year)) +
   theme(aspect.ratio = 0.5) + 
   xlab("Engine size") + ylab("Miles per gallon")
 ```
@@ -245,9 +246,9 @@ ggplot(mpg) +
 ---
 class: inverse, middle
 
-# Exercise 2B
------------
-## Polishing your scatterplot
+# Excercise 2B
+
+## Polish your scatterplots
 
 ---
 
@@ -256,8 +257,8 @@ class: inverse, middle
 Use `facet_wrap` to split your plot into facets that each display a subset of the data.
 
 ```{r out.width = "70%", fig.asp = 0.7, fig.width=8, warning=F, fig.align="center"}
-ggplot(mpg) + 
-  geom_point(aes(x=displ, y=hwy, color=year)) +
+ggplot(data=mpg) + 
+  geom_point(mapping=aes(x=displ, y=hwy, color=year)) +
   facet_wrap(~class, nrow=2)
 ```
 ---
@@ -279,8 +280,8 @@ head(iris)
 # Look at your base-layer first
 
 ```{r out.width = "65%", fig.asp = 0.7, fig.align="center"}
-ggplot(iris) +
-  geom_point(aes(x=Petal.Length, y=Petal.Width, color = Species, shape = Species), size = 3) + 
+ggplot(data=iris) +
+  geom_point(mapping=aes(x=Petal.Length, y=Petal.Width, color = Species, shape = Species), size = 3) + 
   xlab("Petal length") + ylab("Petal width")
 ```
 
@@ -291,8 +292,8 @@ ggplot(iris) +
 The smooth geometry: `geom_smooth`
 
 ```{r out.width = "70%", fig.asp = 0.7, warning=F, message=F, fig.align="center"}
-ggplot(iris) + 
-  geom_smooth(aes(x=Petal.Length, y=Petal.Width, 
+ggplot(data=iris) + 
+  geom_smooth(mapping=aes(x=Petal.Length, y=Petal.Width, 
                  color = Species), size = 1) +
     xlab("Petal length") + ylab("Petal width")
 ```
@@ -303,9 +304,9 @@ By default uses a local regression (`loess`) smoother.
 # Combining geometries
 
 ```{r out.width = "60%", fig.asp = 0.7, warning=F, message=F, fig.align="center"}
-ggplot(iris) +
-  geom_smooth(color = "black", aes(x=Petal.Length, y=Petal.Width)) + 
-  geom_point(aes(x=Petal.Length, y=Petal.Width, color = Species, shape = Species), size = 3) +
+ggplot(data=iris) +
+  geom_smooth(color = "black", mapping=aes(x=Petal.Length, y=Petal.Width)) + 
+  geom_point(mapping=aes(x=Petal.Length, y=Petal.Width, color = Species, shape = Species), size = 3) +
     xlab("Petal length") + ylab("Petal width")
 ```
 
@@ -316,9 +317,9 @@ Note that the order you give the geometries affects the order they are plotted.
 # Smooth by group
 
 ```{r out.width = "75%", fig.asp = 0.7, warning=F, message=F, fig.align="center"}
-ggplot(iris) + 
-  geom_smooth(aes(x=Petal.Length, y=Petal.Width, group = Species), color = "black") + 
-  geom_point(aes(x=Petal.Length, y=Petal.Width, color = Species, shape = Species), size = 3)
+ggplot(data=iris) + 
+  geom_smooth(mapping=aes(x=Petal.Length, y=Petal.Width, group = Species), color = "black") + 
+  geom_point(mapping=aes(x=Petal.Length, y=Petal.Width, color = Species, shape = Species), size = 3)
 ```
 
 ---
@@ -326,9 +327,9 @@ ggplot(iris) +
 # Use a linear model instead 
 
 ```{r out.width = "75%", fig.asp = 0.7, message=F, fig.align="center"}
-ggplot(iris) + 
-   geom_point(aes(x=Petal.Length, y=Petal.Width, shape = Species, color=Species), size = 3) +
-  geom_smooth(aes(x=Petal.Length, y=Petal.Width, group = Species), color="black", method="lm") 
+ggplot(data=iris) + 
+   geom_point(mapping=aes(x=Petal.Length, y=Petal.Width, shape = Species, color=Species), size = 3) +
+  geom_smooth(mapping=aes(x=Petal.Length, y=Petal.Width, group = Species), color="black", method="lm") 
  
 ```
 
@@ -350,19 +351,9 @@ knitr::include_graphics("https://paulvanderlaken.files.wordpress.com/2017/09/sim
 
 class: middle, inverse
 
-#Exercise 2C
--------
+#Excercise 2C
+
 ## Combining geometries
-
----
-# The histogram
-## Single continuous variable
-
-Histograms pile observations into predetermined bins
-
-```{r}
-
-```
 
 ---
 # The boxplot
@@ -384,34 +375,47 @@ knitr::include_graphics("https://miro.medium.com/max/11700/1*2c21SkzJMf3frPXPAR_
 # The `geom_boxplot` geometry
 
 ```{r out.width = "75%", fig.asp = 0.7}
-ggplot(iris) +
-  geom_boxplot(aes(x=Species, y=Petal.Width, fill=Species))
+ggplot(data=iris) +
+  geom_boxplot(mapping=aes(x=Species, y=Petal.Width, fill=Species))
 ```
 
 ---
 
 class: middle, inverse
 
-# Exercise 2D
------
+# Excercise 2D
+
 ## Build a boxplot
+
+---
+# A single continuous variable
+## histogram: `geom_histogram`
+
+Histograms pile observations into predetermined bins
+
+```{r, out.width="60%", fig.asp=0.7, fig.align="center"}
+ggplot(data=iris) +
+  geom_histogram(mapping=aes(x=Sepal.Length), bins=15, color="white")
+```
+
 
 ---
 # A single categorical variable
 ### bar charts: `geom_bar()`
 
-```{r out.width = "65%", fig.asp = 0.7}
+```{r out.width = "65%", fig.asp = 0.7, fig.align="center"}
 ggplot(data=mpg) + 
-  geom_bar(aes(x=class)) + 
+  geom_bar(mapping=aes(x=class)) + 
   xlab("Vehicle class") + ylab("Number of vehicles tested")
 ```
+
 
 ---
 # Multiple categorical variables
 
 ```{r, out.width = "90%", fig.asp = 0.5}
 ggplot(data=mpg) + 
-  geom_bar(aes(x=class, fill=manufacturer)) + 
+  geom_bar(mapping=aes(x=class, fill=manufacturer)) + 
   xlab("Vehicle class") + ylab("Number of vehicles tested") + 
   theme(axis.text.x = element_text(size = 8))
 ```
@@ -419,28 +423,27 @@ ggplot(data=mpg) +
 ---
 # Proportions
 Use `position="fill"` to turn counts into proportions
-```{r, out.width = "80%", fig.asp = 0.7}
+```{r, out.width = "80%", fig.asp = 0.7, fig.align="center"}
 ggplot(data=mpg) + 
-  geom_bar(aes(x=manufacturer, fill=class), position="fill") +
+  geom_bar(mapping=aes(x=manufacturer, fill=class), position="fill") +
   xlab("Manufacturer") + ylab("Number of vehicles tested") +
   theme(axis.text.x = element_text(size = 8), aspect.ratio=0.5) 
 ```
 
-
 ---
+
 class: middle, inverse
 
-#Exercise 2E
--------
-## Univariate plots
+# Excercise 2E
 
+## Univariate plots
 ---
 
 # Interactive plots
 
  *1.* Build your `ggplot`
 ```{r, out.width="80%", fig.asp=0.7, cache=FALSE}
-p <- ggplot(iris) + geom_point(aes(x=Petal.Length, y=Petal.Width, color=Species, shape = Species), size = 3)
+p <- ggplot(data=iris) + geom_point(mapping=aes(x=Petal.Length, y=Petal.Width, color=Species, shape = Species), size = 3)
 ```
  *2.* convert your ggplot to plotly
 ```{r, cache=FALSE, warning=F, message=F}
