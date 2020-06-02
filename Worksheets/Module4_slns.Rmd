@@ -1,6 +1,8 @@
 ---
 title: 'Module 4 worksheet'
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r}
@@ -31,37 +33,9 @@ z <- sample(0:10, size=10, replace=TRUE)
 
 Rerun the analysis a couple of times do the estimates from `z` change or stay the same? Does this make sense?
 
+
 ###############
 # Exercise 4B #
-###############
-
-## Simulating sampling distributions
-
-We can simulate data from a normal distribution using `rnorm(n, mean, sd)`, where `n` is the number of samples to draw, `mean` is the mean of the distribution and `sd` is the standard deviation of the distribution. 
-
-1. Generate a sample of size 10 from a distribution with mean 0 and standard deviation of 10.
-2. Estimate the mean and standard deviation from the sample. Do these estimates agree with the population parameters?
-3. Use a `for` loop to repeat this estimation procedure a thousand times. Plot the results. Are the distributions centered where you expected? What do the widths of the distribution describe? 
-4. Repeat the above procedue but increase your sample size to 100. How do the sampling distributions change?
-
-```{r}
-#code here
-mean.vec <- sd.vec <- numeric(1000)
-for(i in 1:1000) {
-  sample <- rnorm(10, 0, 10)
-  mean.vec[i] <- mean(sample)
-  sd.vec[i] <- sd(sample)
-}
-
-ggplot() +
-  geom_histogram(aes(x=mean.vec), col="white")
-ggplot() +
-  geom_histogram(aes(x=sd.vec), col="white")
-
-```
-
-###############
-# Exercise 4C #
 ###############
 
 ## Calculating z-scores, and p-values 
@@ -85,12 +59,12 @@ CI.z <- xbar + c(-1,1)*qnorm(0.975)*se
 
 
 ###############
-# Exercise 4D #
+# Exercise 4C #
 ###############
 
 ## Calculating Wald confidence intervals 
 
-Using the dataset above, use the t-distribution to estimate the confidence intervals. Explain why these intervals are wider than the intervals using the normal distribution.
+Using the dataset above, use the t-distribution to estimate the confidence intervals. Explain why these intervals are wider than the intervals using the normal distribution. Get the p-value as well. How does it compare to the p-value from the z-test in part B? How does this p-value compare to the value you got from the randomization test in Module 3?
 
 ```{r}
 CI.t <- xbar + c(-1,1)*qt(0.975, df=15)*se
@@ -98,7 +72,7 @@ CI.t <- xbar + c(-1,1)*qt(0.975, df=15)*se
 
 
 ###############
-# Exercise 4E #
+# Exercise 4D #
 ###############
 
 ## One- and two-sample t-tests

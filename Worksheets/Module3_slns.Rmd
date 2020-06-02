@@ -1,6 +1,8 @@
 ---
 title: 'Module 3 worksheet'
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r}
@@ -71,7 +73,7 @@ for(i in 1:6) {
 }
 ```
 
-**Excercise** Update the below for-loop from above to store the mean value for each column in the dataset. I've given you most of the code but you will need to store each mean value in the vector mean.code.
+**Excercise** Update the below for-loop from above to store the mean value for each column in the dataset. I've given you most of the code but you will need to store each mean value in the vector mean.silver.
 
 ```{r}
 mean.silver <- numeric(6) #create empty vector
@@ -98,7 +100,7 @@ The pebbled butterfly fish (*Chaetodon multicinctus*) is a reef fish endemic to 
 butt.dat <- read.csv(file="../Data/ButterflyFishDiffs.csv")
 
 obs.stat <- mean(butt.dat$Difference) 
-null.vec <- vector('numeric', 1e4)
+null.vec <- numeric(1e4)
 for(i in 1:length(null.vec)) {
   multiplier <- sample(x=c(-1,1), size=length(butt.dat$Difference), replace=TRUE)
   null.vec[i] <- mean(butt.dat$Difference*multiplier)
@@ -131,7 +133,7 @@ print(obs.val)
 
 null.vec <- numeric(1e4)
 for(i in 1:1e4) {
-  index       <- sample(1:19, 10, replace=F)
+    index       <- sample(1:19, 10, replace=F)
   null.vec[i] <- mean(glass.dat$drinkingMinutes[index]) - mean(glass.dat$drinkingMinutes[-index])
 }
 
