@@ -98,7 +98,7 @@ knitr::include_graphics("https://apps-pifsc.fisheries.noaa.gov/hawaiian_monk_sea
 # The data
 ```{r, echo=F, fig.align="center", out.width="50%", warning=F, message=F, fig.asp=0.5}
 library(ggplot2)
-monk.dat <- read.csv(file="../Data/MonkHandlingResponse.csv")
+monk.dat <- read.csv(file="../ProtectedData/MonkHandlingResponse.csv")
 new.dat <- rbind(data.frame(Proportion=monk.dat$Before, State="Before handling event"), data.frame(Proportion=monk.dat$After, State="After handling event"))
 ggplot(data=new.dat, aes(x=Proportion)) +
   facet_wrap(~State) +
