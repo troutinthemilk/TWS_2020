@@ -44,7 +44,7 @@ theme_update(plot.title = element_text(hjust = 0.5),
 ---
 # Sleep in mammals
 
-Sleep is characterized by either slow wave (non-dreaming) or drapid eye movement (dreaming), with wide variability in theamount of both types of sleep.
+Sleep is characterized by either slow wave (non-dreaming) or rapid eye movement (dreaming), with wide variability in the amount of both types of sleep.
 
 * Roe Deer sleep < 3 hours/day
 * Little Brown bat sleeps close to 20 hours per day
@@ -59,7 +59,7 @@ Why? What is the purpose of sleep?
 .footnote[Allison, Truett and Cicchetti, Domenic V. (1976), Sleep in Mammals: Ecological and Constitutional Correlates, Science, November 12, vol. 194]
 
 ---
-# Continuous response, continuous predictor
+# Simple linear regression
 
 Is the total amount of sleep related to an animals brain weight?
 
@@ -131,14 +131,13 @@ $$\boldsymbol{R}= \left[\begin{array}{cc}
 \rho_{ZX} & \rho_{ZY} &  1 
 \end{array} \right]$$
 
-We are often interested primarily in correlations between predictor and the response, but we will discuss correlations between predictors as well.
 
 ---
 # Illustrating correlation matrices
 
 ```{r, fig.align="center", warning=F, messages=F, out.width="50%", fig.asp=0.8}
 library(corrplot)
-M <- cor(sleep.dat[,3:10], use="pairwise.complete") #extract numeric responses
+M <- cor(x=sleep.dat[,3:10], use="pairwise.complete") #extract numeric responses
 corrplot.mixed(M)
 ```
 
@@ -154,7 +153,11 @@ class: inverse, middle
 
 <br>
 
-$r$ tells us how strong a linear association is. It can't tell us how fast the response changes with changes in the predictor.
+$r$ tells us how strong a linear association is. It can't 
+
+- tell us how fast the response changes with changes in the predictor.
+- tell us about nonlinear associations with the predictor.
+- tell us whether something is biologically important
 
 <br>
 
@@ -169,7 +172,7 @@ ggplot(data=sleep.dat) +
 ---
 # Simple linear regression
 
-The goal is to fit a line that could have genererated the data. Estimates the **intercept** and slope of the line **slope**, as well as the **variance** in the residuals. 
+The goal is to fit a line that could have genererated the data. Estimates the **intercept** and **slope** of the line, as well as the **variance** in the residuals. 
 
 $$
 \begin{align*}
@@ -184,7 +187,8 @@ ggplot(data=sleep.dat) +
   geom_point(aes(x=BrainWt, y=TotalSleep), size=4, alpha=0.5) + geom_smooth(method="lm", se=F, aes(x=BrainWt, y=TotalSleep), col="black")
 ```
 
-Fitting works by trying to minimize $\sigma^2$.
+
+**Response** variable goes on the y-axis, **predictor** variable on the x-axis
 
 ---
 # Fitting `lm`'s in R
@@ -203,7 +207,7 @@ summary(sleep.lm)$coef
 ```
 
 
-- df (degrees of freedom used in the t-tests, df=n-1-#betas)
+- df (degrees of freedom used in the t-tests, df=n - #betas - 1)
 ```{r, echo=F}
 summary(sleep.lm)$df[2]
 ```
@@ -336,14 +340,14 @@ plot_model(monet.mod, type="pred", terms=c("SIZE", "HOUSE"), show.data=TRUE)
 ---
 # Interactions
 
-I the previous model the intercept varied by auction house. In this model **both** the intercept and slope vary.
+In the previous model the intercept varied by auction house. In this model **both** the intercept and slope vary.
 
 ```{r}
 monet.mod2  <- lm(PRICE ~ SIZE * HOUSE, data=monet.dat)
 coef(summary(monet.mod2))
 ```
 
-```{r, echo=F, out.width="60%", fig.align="center", fig.asp=0.5}
+```{r, echo=F, out.width="50%", fig.align="center", fig.asp=0.5}
 library(sjPlot)
 plot_model(monet.mod2, type="pred", terms=c("SIZE", "HOUSE"), show.data=TRUE)
 ```
@@ -526,9 +530,15 @@ Post (aka post-hoc) tests look at pairwise comparisons and attempt to control fo
 
 The Tukey-test uses the t-statistic (mean/SE) but the p-value controls for the fact that you are making comparisons. It controls for 5% false positives for all tests, instead of per-test.
 
-```{r, echo=F, fig.align="right"}
+```{r, fig.align="right", echo=F}
 knitr::include_graphics("https://upload.wikimedia.org/wikipedia/en/e/e9/John_Tukey.jpg")
 ```
+
+.footnote[
+image: https://en.wikipedia.org/wiki/John_Tukey
+
+good wikipedia article: https://en.wikipedia.org/wiki/Tukey%27s_range_test
+]
 
 ---
 # Applying Tukey's test
@@ -536,11 +546,6 @@ knitr::include_graphics("https://upload.wikimedia.org/wikipedia/en/e/e9/John_Tuk
 ```{r}
 TukeyHSD(aov(egg_length ~ host_species, cuckoo.dat))
 ```
-.footnote[
-image: https://en.wikipedia.org/wiki/John_Tukey
-
-good wikipedia article: https://en.wikipedia.org/wiki/Tukey%27s_range_test
-]
 
 ---
 # A word about anova

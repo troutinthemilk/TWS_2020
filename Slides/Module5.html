@@ -33,7 +33,7 @@ class: center, middle, inverse, title-slide
 ---
 # Sleep in mammals
 
-Sleep is characterized by either slow wave (non-dreaming) or drapid eye movement (dreaming), with wide variability in theamount of both types of sleep.
+Sleep is characterized by either slow wave (non-dreaming) or rapid eye movement (dreaming), with wide variability in the amount of both types of sleep.
 
 * Roe Deer sleep &lt; 3 hours/day
 * Little Brown bat sleeps close to 20 hours per day
@@ -48,7 +48,7 @@ Why? What is the purpose of sleep?
 .footnote[Allison, Truett and Cicchetti, Domenic V. (1976), Sleep in Mammals: Ecological and Constitutional Correlates, Science, November 12, vol. 194]
 
 ---
-# Continuous response, continuous predictor
+# Simple linear regression
 
 Is the total amount of sleep related to an animals brain weight?
 
@@ -117,7 +117,6 @@ The correlation matrix, `\(\boldsymbol{\Sigma}\)`, contains each pairwise correl
 \rho_{ZX} &amp; \rho_{ZY} &amp;  1 
 \end{array} \right]$$`
 
-We are often interested primarily in correlations between predictor and the response, but we will discuss correlations between predictors as well.
 
 ---
 # Illustrating correlation matrices
@@ -132,7 +131,7 @@ library(corrplot)
 ```
 
 ```r
-M &lt;- cor(sleep.dat[,3:10], use="pairwise.complete") #extract numeric responses
+M &lt;- cor(x=sleep.dat[,3:10], use="pairwise.complete") #extract numeric responses
 corrplot.mixed(M)
 ```
 
@@ -150,7 +149,11 @@ class: inverse, middle
 
 &lt;br&gt;
 
-`\(r\)` tells us how strong a linear association is. It can't tell us how fast the response changes with changes in the predictor.
+`\(r\)` tells us how strong a linear association is. It can't 
+
+- tell us how fast the response changes with changes in the predictor.
+- tell us about nonlinear associations with the predictor.
+- tell us whether something is biologically important
 
 &lt;br&gt;
 
@@ -159,7 +162,7 @@ class: inverse, middle
 ---
 # Simple linear regression
 
-The goal is to fit a line that could have genererated the data. Estimates the **intercept** and slope of the line **slope**, as well as the **variance** in the residuals. 
+The goal is to fit a line that could have genererated the data. Estimates the **intercept** and **slope** of the line, as well as the **variance** in the residuals. 
 
 $$
 `\begin{align*}
@@ -171,7 +174,8 @@ $$
 
 &lt;img src="Module5_files/figure-html/unnamed-chunk-7-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
-Fitting works by trying to minimize `\(\sigma^2\)`.
+
+**Response** variable goes on the y-axis, **predictor** variable on the x-axis
 
 ---
 # Fitting `lm`'s in R
@@ -216,7 +220,7 @@ summary(sleep.lm)
 ```
 
 
-- df (degrees of freedom used in the t-tests, df=n-1-#betas)
+- df (degrees of freedom used in the t-tests, df=n - #betas - 1)
 
 ```
 ## [1] 36
@@ -435,7 +439,7 @@ plot_model(monet.mod, type="pred", terms=c("SIZE", "HOUSE"), show.data=TRUE)
 ---
 # Interactions
 
-I the previous model the intercept varied by auction house. In this model **both** the intercept and slope vary.
+In the previous model the intercept varied by auction house. In this model **both** the intercept and slope vary.
 
 
 ```r
@@ -453,7 +457,7 @@ coef(summary(monet.mod2))
 ## SIZE:HOUSE3 -0.0025995930 0.0025613783 -1.0149196 3.107471e-01
 ```
 
-&lt;img src="Module5_files/figure-html/unnamed-chunk-24-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Module5_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, middle
@@ -615,7 +619,13 @@ The Tukey-test uses the t-statistic (mean/SE) but the p-value controls for the f
 knitr::include_graphics("https://upload.wikimedia.org/wikipedia/en/e/e9/John_Tukey.jpg")
 ```
 
-&lt;img src="https://upload.wikimedia.org/wikipedia/en/e/e9/John_Tukey.jpg" style="display: block; margin: auto 0 auto auto;" /&gt;
+![](https://upload.wikimedia.org/wikipedia/en/e/e9/John_Tukey.jpg)&lt;!-- --&gt;
+
+.footnote[
+image: https://en.wikipedia.org/wiki/John_Tukey
+
+good wikipedia article: https://en.wikipedia.org/wiki/Tukey%27s_range_test
+]
 
 ---
 # Applying Tukey's test
@@ -649,11 +659,6 @@ TukeyHSD(aov(egg_length ~ host_species, cuckoo.dat))
 ## Wren-Robin                 -1.44500000 -2.392271433 -0.49772857 0.0003183
 ## Wren-Tree Pipit            -1.96000000 -2.922428738 -0.99757126 0.0000006
 ```
-.footnote[
-image: https://en.wikipedia.org/wiki/John_Tukey
-
-good wikipedia article: https://en.wikipedia.org/wiki/Tukey%27s_range_test
-]
 
 ---
 # A word about anova

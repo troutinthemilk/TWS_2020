@@ -235,14 +235,14 @@ The Hawai'ian monk seal data. Calculated the confidence interval of the behavior
 
 ```{r, echo=F}
 monk.dat <- read.csv(file="../ProtectedData/MonkHandlingResponse.csv")
-diff.dat <- monk.dat$After - monk.dat$Before
+monk.dat$Difference <- monk.dat$After - monk.dat$Before
 ```
 
 .pull-left[
 ```{r}
-xbar <- mean(diff.dat)
-n <- length(diff.dat)
-se <- sd(diff.dat)/sqrt(n)
+xbar <- mean(monk.dat$Difference)
+n <- length(monk.dat$Difference)
+se <- sd(monk.dat$Difference)/sqrt(n)
 
 xbar - qnorm(0.975)*se
 xbar + qnorm(0.975)*se
@@ -262,7 +262,7 @@ knitr::include_graphics("https://www.staradvertiser.com/wp-content/uploads/2020/
 
 Given a sample with mean $\bar{x}$ and standard error $\sigma_\bar{x}$, the z-statistic is normally distributed
 
-$$ Z = \frac{\bar{x} - \mu}{\sigma_\bar{x}}$$
+$$ Z = \frac{\bar{x} - H_0}{\sigma_\bar{x}}$$
 
 ### Example
 
@@ -319,7 +319,7 @@ class: inverse, middle
 ---
 # The t-distribution
 
-$$t = \frac{\bar{x} - \mu}{s}$$
+$$t = \frac{\bar{x} - H_0}{s}$$
 
 
 ```{r, echo=F, fig.align="center", fig.asp=0.4, out.width="90%", echo=F, message=F, warning=F}
@@ -348,9 +348,9 @@ The additional uncertainty in the t-distribution influences the confidence inter
 
 .pull-left[
 ```{r}
-xbar <- mean(diff.dat)
-n <- length(diff.dat)
-se <- sd(diff.dat)/sqrt(n)
+xbar <- mean(monk.dat$Difference)
+n <- length(monk.dat$Difference)
+se <- sd(monk.dat$Difference)/sqrt(n)
 
 xbar - qt(0.975, df=n-1)*se
 xbar + qt(0.975, df=n-1)*se
@@ -379,7 +379,7 @@ class: inverse, middle
 The Hawai'ian monk seal data. Test if the difference between treatments is 0.
 ```{r, echo=F}
 monk.dat <- read.csv(file="../ProtectedData/MonkHandlingResponse.csv")
-diff.dat <- monk.dat$After - monk.dat$Before
+monk.dat$Difference <- monk.dat$After - monk.dat$Before
 ```
 
 <br>
@@ -389,11 +389,11 @@ diff.dat <- monk.dat$After - monk.dat$Before
 Do this by hand
 
 ```{r}
-xbar <- mean(diff.dat)
+xbar <- mean(monk.dat$Difference)
 xbar
-n <- length(diff.dat)
-se <- sd(diff.dat)/sqrt(n)
-t <- (mean(diff.dat) - 0)/se
+n <- length(monk.dat$Difference)
+se <- sd(monk.dat$Difference)/sqrt(n)
+t <- (mean(monk.dat$Difference) - 0)/se
 t
 2*pt(t, df=n-1)
 ```
@@ -402,7 +402,7 @@ t
 .pull-right[
 Or use the R function `t.test`:
 ```{r}
-t.test(diff.dat)
+  t.test(x=monk.dat$Difference)
 ```
 ]
 
@@ -474,7 +474,7 @@ class: inverse, middle
 
 - We tested whether the mean of a sample was equal to a specific value (the null hypothesis)
 
-- We looked at one- and two-sample tests
+- We looked at one- and two-sample t-tests
 
 
 
