@@ -525,11 +525,8 @@ class: inverse, middle
 Post (aka post-hoc) tests look at pairwise comparisons and attempt to control for the fact that you are making **lots of comparisons**. 
 
 The Tukey-test uses the t-statistic (mean/SE) but the p-value controls for the fact that you are making comparisons. It controls for 5% false positives for all tests, instead of per-test.
-```{r, echo=F}
 
-```
-
-```{r echo=F, fig.align="right"}
+```{r, echo=F, fig.align="right"}
 knitr::include_graphics("https://upload.wikimedia.org/wikipedia/en/e/e9/John_Tukey.jpg")
 ```
 
