@@ -78,7 +78,9 @@ for(i in 1:6) {
 ```{r}
 mean.silver <- numeric(6) #create empty vector
 
-#code here
+for(i in 1:6) {
+  mean.silver[i] <- mean(silver.dat[,i], na.rm=TRUE)
+}
 ```
 
 

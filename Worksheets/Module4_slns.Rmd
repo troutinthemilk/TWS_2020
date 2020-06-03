@@ -55,6 +55,9 @@ se <- sd(butt.dat$Difference)/sqrt(16)
 z.score <- xbar/se
 p.val <- 2*pnorm(q=z.score, lower.tail=F)
 CI.z <- xbar + c(-1,1)*qnorm(0.975)*se
+
+CI.z
+p.val
 ```
 
 
@@ -67,7 +70,11 @@ CI.z <- xbar + c(-1,1)*qnorm(0.975)*se
 Using the dataset above, use the t-distribution to estimate the confidence intervals. Explain why these intervals are wider than the intervals using the normal distribution. Get the p-value as well. How does it compare to the p-value from the z-test in part B? How does this p-value compare to the value you got from the randomization test in Module 3?
 
 ```{r}
+p.val <-2*pt(q=z.score, df=16-1, lower.tail=F)
 CI.t <- xbar + c(-1,1)*qt(0.975, df=15)*se
+CI.t
+p.val
+
 ```
 
 
@@ -98,6 +105,6 @@ bird.dat <- read.csv(file="../Data/Blackbird.csv")
 t.test(Antibody ~ Treatment, data=bird.dat, paired=TRUE)
 
 mouse.dat <- read.csv(file="../Data/SpinocerebellarAtaxia.csv")
-t.test(lifespan ~ treatment, data=bird.dat, paired=TRUE)
+t.test(lifespan ~ treatment, data=mouse.dat, paired=TRUE)
 ```
 
