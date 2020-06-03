@@ -70,7 +70,7 @@ summary(lm(ageInYears ~ proportionBlack, data=lion.dat))
 
 ## Multiple linear regression
 
-1. Read in the dataset, `monet.csv`. Build a model that includes the effects of HOUSE (the auction house), SIGNED (wherther the painting was signed), HEIGHT and WIDTH.
+1. Read in the dataset, `monet.csv`. Build a model that includes the effects of HOUSE (the auction house), SIGNED (whether the painting was signed), HEIGHT and WIDTH.
 
 ```{r}
 monet.dat       <- read.csv(file="../Data/monet.csv", header=TRUE)
@@ -80,7 +80,7 @@ monet.dat <- subset(monet.dat, SIZE< 2000) #just take the paintings less that si
 
 monet.mod <- lm(log(PRICE) ~ HEIGHT + WIDTH + SIGNED + HOUSE -1 , data=monet.dat)
 ```
-Based on your model does a centimeter increase in WIDTH or HEIGHT differently affect the PRICE? Does having a signed painting increase it's value?
+Based on your model does a centimeter increase in WIDTH or HEIGHT differently affect the PRICE? Does having a signed painting increase it's value? Use the `sjPlot` library to plot PRICE predictions against HEIGHT for both signed and unsigned paintings.
 
 
 ###############
