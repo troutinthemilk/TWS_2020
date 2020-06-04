@@ -403,6 +403,7 @@ t
 Or use the R function `t.test`:
 ```{r}
   t.test(x=monk.dat$Difference)
+  t.test(x=monk.dat$Before, y=monk.dat$After, paired=TRUE)
 ```
 ]
 

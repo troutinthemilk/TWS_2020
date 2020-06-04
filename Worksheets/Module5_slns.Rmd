@@ -1,6 +1,8 @@
 ---
 title: 'Module 5 worksheet'
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r}
@@ -51,8 +53,10 @@ Now load a datast that has these correlations and the distances between each pop
 ```{r}
 corr.dat <- read.csv(file="../Data/CorrDistance.csv")
 summary(lm(correlation ~ distance, data=corr.dat))
+confint(lm(correlation ~ distance, data=corr.dat))
 ```
 
+### The confidence interval of the distance effect shows that our estimate is consistent with zero, thus there is no evidence of a relationship between distance and correlation.
 
 The data set contained in `LionNoses.csv` contains the age of male lions and the proportion of their nose that is black (from Whitman et al. 2004). The proportional amount of black on a lions nose tends to change as an individual ages, a pattern that can be used to identify individual lions (http://livingwithlions.org/mara/how-to/identify-lions/). 
 
@@ -63,6 +67,7 @@ lion.dat <- read.csv(file="../Data/LionNoses.csv")
 summary(lm(ageInYears ~ proportionBlack, data=lion.dat))
 ```
 
+### The slope value is 10.6 indicating that for a unit increase in the proportion black of the nose the lion is 10 years older.  The p-value of this estimate indicates that the estimate statististical differs from 0 and the $R^2$ value indicates that hte model explains over 60% of the variation in the data.
 
 ###############
 # Exercise 5C #
@@ -78,10 +83,17 @@ monet.dat$HOUSE <- as.factor(monet.dat$HOUSE)
 monet.dat$SIGNED <- as.factor(monet.dat$SIGNED)
 monet.dat <- subset(monet.dat, SIZE< 2000) #just take the paintings less that size 2000 cm^2
 
-monet.mod <- lm(log(PRICE) ~ HEIGHT + WIDTH + SIGNED + HOUSE -1 , data=monet.dat)
+monet.mod <- lm(PRICE ~ HEIGHT + WIDTH + SIGNED + HOUSE , data=monet.dat)
+summary(monet.mod)
 ```
 Based on your model does a centimeter increase in WIDTH or HEIGHT differently affect the PRICE? Does having a signed painting increase it's value? Use the `sjPlot` library to plot PRICE predictions against HEIGHT for both signed and unsigned paintings.
 
+```{r}
+library(sjPlot)
+plot_model(monet.mod, type="pred", terms=c("HEIGHT", "SIGNED"), show.data=TRUE)
+```
+
+### The model estimates indicate that an increase in height has a slightly larger increase on price than width but they do appear similar. have about the same effect. We also see that signed paintings are more valuable than unsigned paintings.
 
 ###############
 # Exercise 5D #
