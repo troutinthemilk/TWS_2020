@@ -1,6 +1,8 @@
 ---
 title: 'Module 6 worksheet'
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r}
@@ -31,12 +33,19 @@ The dependent variable is the number of longnose dace, **longnosedace**, per 75-
 
 ```{r}
 dace.dat <- read.csv(file="../Data/longnosedace.csv")
-dace.dat <- dace.dat[,-1]#remove stream name from the dataset. this will simplify further analyses
 full.mod <- lm(longnosedace ~ acreage + do2 + maxdepth + no3 + so4 + temp + conduct, data=dace.dat)
 
 library(car)
 vif(full.mod)
 ```
+### This suggests that conductance is collinear with one or more of the other predictors. Removing conductance (below) fixes the issue with collinearity.
+
+```{r}
+full.mod <- lm(longnosedace ~ acreage + do2 + maxdepth + no3 + so4 + temp, data=dace.dat)
+
+vif(full.mod)
+```
+
 
 ###############
 # Exercise 6B #
@@ -72,11 +81,11 @@ anova(bg.mod1, bg.mod2)
 library(sjPlot)
 plot_model(bg.mod1, terms="age", type="pred", show.data=TRUE)
 plot_model(bg.mod2, terms="age", type="pred", show.data=TRUE)
-
-
 ```
+### Visually, the model fits look great for the quadratic model. Based on the F-test and adjusted $R^2$ this model is a better fit for the data.
+
 ################
-# Excercise 6D #
+# Excercise 6C #
 ################
 
 ## LOOCV
@@ -89,9 +98,9 @@ library(caret)
 
 sleep.control <- trainControl(method = "LOOCV") #tell the function we want to do leave one out cross validation
 
-mod1.xv <- train(TotalSleep ~ LifeSpan + Exposure, data=sleep.dat, method = "lm", na.action=na.omit, trControl=sleep.control)
-mod2.xv <- train(TotalSleep ~ Danger + Predation, data=sleep.dat, method = "lm", na.action=na.omit, trControl= sleep.control)
-mod3.xv <- train(TotalSleep ~ Exposure, data=sleep.dat, method = "lm", na.action=na.omit, trControl= sleep.control)
+mod1.xv <- train(TotalSleep ~ LifeSpan + Exposure, data=mammal.dat, method = "lm", na.action=na.omit, trControl=sleep.control)
+mod2.xv <- train(TotalSleep ~ Danger + Predation, data=mammal.dat, method = "lm", na.action=na.omit, trControl= sleep.control)
+mod3.xv <- train(TotalSleep ~ Exposure, data=mammal.dat, method = "lm", na.action=na.omit, trControl= sleep.control)
 
 print(mod1.xv$results)
 print(mod2.xv$results)
@@ -99,6 +108,7 @@ print(mod3.xv$results)
 
 ```
 
+### LOOCV shows that model 2 (Danger + Predation) has the best predictive ability.
 
 ################
 # Excercise 6D #
@@ -112,17 +122,20 @@ Perform model selection using AIC on the bluegill models from problem 6D. Does A
 library(MuMIn)
 model.sel(list(bg.mod1, bg.mod2))
 ```
+### Based on the model selection table the model with the quadratic age term was much more strongly supported than the simpler model.
 
-Now use AIC to select from the three models defined in model 6D. Does this agree with the results from LOOCV?
+Now use AIC to select from the three models defined in model 6C. Does this agree with the results from LOOCV?
 
 ```{r}
-read.csv(file="../Data/MammalSleep.csv")
-mod1 <- lm(TotalSleep ~ LifeSpan + Exposure, data=mammal.dat)
-mod2 <- lm(TotalSleep ~ Danger + Predation, data=mammal.dat) 
-mod3 <- lm(TotalSleep ~ Exposure, data=mammal.dat)
+mammal.dat <- read.csv(file="../Data/MammalSleep.csv")
+mammal.dat <- mammal.dat[complete.cases(mammal.dat), ]
+
+mod1 <- lm(TotalSleep ~ LifeSpan + Exposure, data=mammal.dat, na.action=na.omit)
+mod2 <- lm(TotalSleep ~ Danger + Predation, data=mammal.dat, na.action=na.omit) 
+mod3 <- lm(TotalSleep ~ Exposure, data=mammal.dat, na.action=na.omit)
 library(MuMIn)
 model.sel(list(mod1, mod2, mod3), rank="AIC")
 
 ```
 
-
+### Based on the above AIC table we see that the Danger and Predation predictors combine to form the best model of sleep. This agrees with the result from the cross-validation selection process.
